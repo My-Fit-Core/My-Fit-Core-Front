@@ -56,6 +56,66 @@ Figma를 UI 구현 기준으로 사용합니다. 실제 페이지 개발 전에 
 
 `BrowserRouter`를 사용하므로 배포 서버는 새로고침과 직접 URL 접속 시 `index.html`로 돌아오는 SPA fallback이 필요합니다. Flutter WebView의 URL 처리, 히스토리, 딥링크 및 safe area 정책은 연동 방식이 확정된 뒤 검증해야 합니다. 현재는 `viewport-fit=cover`만 준비했고 safe area 여백을 강제하지 않습니다.
 
-## 브랜치와 PR 제안
+## 브랜치 전략
 
-`main`은 검증된 코드를 유지합니다. 초기 세팅은 `chore/project-setup`, 공통 UI는 `feat/common-ui`, 마이페이지는 `feat/mypage`, 옷장은 `feat/closet`을 제안합니다. 그 외 기능은 `feat/{기능명}`, 수정은 `fix/{오류명}`을 사용합니다. 각 담당자가 기능 브랜치에서 작업하고 타입 검사·린트·포맷·빌드 결과를 PR에 기록한 뒤 리뷰를 거쳐 `main`에 병합합니다. 푸시·병합은 담당자 확인 후 진행합니다.
+GitHub 기본 브랜치는 `develop`입니다. `main`은 통합 검증을 통과한 발표·시연용 안정 버전이며, `develop`은 프론트엔드 개발과 통합 테스트의 기준입니다. 두 브랜치에서 직접 개발하거나 Push하지 않습니다. 작업 브랜치는 최신 `develop`에서 만들고 PR로 `develop`에 병합합니다. 통합 테스트를 통과한 `develop`만 별도 PR로 `main`에 병합합니다. 현재는 별도 release·hotfix 브랜치를 사용하지 않습니다.
+
+작업 브랜치 형식은 `타입/이슈번호-작업명`이며 이슈 번호에는 실제 GitHub Issue 번호를 사용합니다. 기존 브랜치는 임의로 삭제하거나 이름을 바꾸지 않습니다.
+
+| 타입       | 용도                    |
+| ---------- | ----------------------- |
+| `feat`     | 신규 기능               |
+| `fix`      | 오류 수정               |
+| `ui`       | UI 및 디자인 수정       |
+| `chore`    | 환경설정 및 의존성 관리 |
+| `refactor` | 코드 구조 개선          |
+| `docs`     | 문서 수정               |
+| `test`     | 테스트 추가 및 수정     |
+
+예: `feat/12-common-button`, `feat/13-mypage`, `feat/14-closet`, `fix/15-image-upload`, `chore/16-tailwind-setup`
+
+## Git 작업 순서
+
+1. GitHub Issue를 만들고 작업 범위를 정합니다.
+2. 최신 `develop`을 가져옵니다.
+3. Issue 번호로 작업 브랜치를 만듭니다.
+4. 담당 기능을 개발합니다.
+5. 타입 검사, ESLint, Prettier, 빌드와 필요한 테스트를 실행합니다.
+6. 변경사항을 Commit하고 작업 브랜치를 Push합니다.
+7. `develop`을 대상으로 Pull Request를 만듭니다.
+8. 상대 프론트엔드 팀원의 코드 리뷰와 승인을 받습니다.
+9. 필수 수정사항을 해결한 뒤 `develop`에 Merge합니다.
+10. 통합 검증을 마친 `develop`을 별도 PR로 `main`에 Merge합니다.
+
+새 작업을 시작할 때 아래 명령을 실행합니다. 마지막 브랜치명은 실제 Issue 번호와 작업명으로 바꿉니다. 브랜치를 전환하기 전에 `git status`로 미저장 변경사항을 확인합니다.
+
+```bash
+git status
+git switch develop
+git pull --ff-only origin develop
+git switch -c feat/12-common-button
+```
+
+개발 중 상대 팀원의 최신 코드를 가져올 때는 변경사항을 Commit 또는 Stash로 안전하게 저장한 다음 본인의 작업 브랜치에서 실행합니다.
+
+```bash
+git fetch origin
+git merge origin/develop
+```
+
+Commit 메시지는 `type: 작업 내용` 형식을 사용합니다. 예: `feat: 공통 버튼 컴포넌트 구현`, `fix: 이미지 등록 오류 수정`, `ui: 옷장 카드 여백 수정`, `chore: Tailwind CSS 설정 추가`, `docs: 협업 규칙 수정`.
+
+일반 개발 PR은 Base `develop`, Compare 작업 브랜치로 만듭니다. 안정 버전 반영 PR은 Base `main`, Compare `develop`으로 만듭니다. PR 제목은 `[타입] #이슈번호 작업 내용` 형식을 사용하고, 본문에는 작업 내용·스크린샷·검증 결과·관련 Issue·기타사항을 기록합니다. Issue가 없는 예외 작업은 번호를 만들어 적지 않습니다. 공통 협업 규칙은 [Notion 문서](https://app.notion.com/p/422ff3436dff801d899bf4dabdff399a)를 참고합니다.
+
+상대 프론트엔드 팀원 1명의 승인을 기본으로 하고 필수 수정사항을 해결한 뒤 Merge합니다. 작업 브랜치 → `develop`은 Squash and merge를 권장합니다. `develop` → `main`은 Create a merge commit으로 브랜치 간 이력을 유지합니다. `main`과 `develop`에 직접 Push하지 않으며, 사용자 승인 없이 Merge, Force Push 또는 기존 브랜치 삭제를 하지 않습니다.
+
+## 브랜치 운영 일정
+
+| 기간            | 작업                                                    |
+| --------------- | ------------------------------------------------------- |
+| 2026/11/24~12/2 | 공통 컴포넌트 및 페이지 개발 후 `develop` 병합          |
+| 2026/12/2       | 페이지 통합 테스트 후 검증을 통과한 `develop` → `main`  |
+| 2026/12/3 이후  | API 및 AI 기능 연동 작업 후 `develop` 병합              |
+| 최종 발표 전    | 통합 테스트 및 모바일 실기기 검증 후 `develop` → `main` |
+
+12월 2일 페이지 구현 완료 시 Mock 데이터 사용 여부와 실제 API 연동 상태를 구분하여 기록합니다. 검증을 통과하지 못한 코드는 `main`에 병합하지 않습니다.

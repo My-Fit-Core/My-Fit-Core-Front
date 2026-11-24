@@ -14,4 +14,10 @@ Figma 기준 파일은 https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마�
 
 불필요한 의존성이나 과도한 추상화를 추가하지 않는다. API 명세와 인증 흐름을 임의로 만들지 않는다. 비밀정보를 소스나 `VITE_` 환경변수에 넣지 않는다. `.env.local` 등 실제 환경 파일은 Git에 포함하지 않는다. TypeScript strict를 유지하고 ESLint와 Prettier 규칙을 따른다. 완료 후 `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run build`를 실행한다.
 
-사용자 승인 없이 Git commit, push, merge, force push를 하지 않는다. 기존 작업과 이력을 보존하고 담당 브랜치에서 작업한다.
+## Git 협업 규칙
+
+신규 작업은 Issue와 작업 범위를 먼저 확인하고, 최신 `develop`에서 `타입/실제이슈번호-작업명` 형식의 브랜치를 만들어 시작한다. `main`은 검증된 발표·시연용 코드, `develop`은 개발 및 통합 테스트 기준이다. 두 브랜치에서 직접 개발하거나 Push하지 않는다. 일반 개발 PR은 `develop`을 대상으로 하고, 통합 검증을 통과한 `develop`만 별도 PR로 `main`에 병합한다.
+
+다른 팀원의 코드와 공통 컴포넌트를 임의로 수정하지 않는다. 기존 공통 컴포넌트와 디자인 토큰을 재사용하고, 확정되지 않은 API 명세를 임의로 구현하지 않는다. 작업 완료 후 `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run build`를 실행한다.
+
+사용자 승인 없이 Git commit, push, PR 생성, merge, force push 또는 기존 브랜치 삭제를 하지 않는다. 이번 브랜치 전략 변경 작업에서 명시적으로 허용된 Issue 생성, 작업 브랜치 생성, commit, push, PR 생성 및 develop 최초 Push와 기본 브랜치 변경은 예외다. 이번 작업에서도 PR을 직접 merge하지 않는다. 기존 작업과 이력을 보존하고 담당 브랜치에서 작업한다.
