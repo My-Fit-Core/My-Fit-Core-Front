@@ -1,52 +1,45 @@
 # MAPIKO 프론트엔드 사전 분석 인덱스
 
-- 분석일: 2026-11-24 (Asia/Seoul)
-- 분석 브랜치: docs/figma-analysis
-- 기준 Commit: 2db91badb9f9398cfe127f3d66934b7cf031a76f
-- Figma File Key: XhhPLJSwkdCMAJgzqFLELf
-- 기준 페이지: [최종 디자인 2:6](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=2-6), [디자인 시스템 2:4](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=2-4), [참고 와이어프레임 2:5](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=2-5)
-- GitHub: [My-Fit-Core/My-Fit-Core-Front](https://github.com/My-Fit-Core/My-Fit-Core-Front); PR #2·#3은 2026-11-24 조회 시 open·미병합
+- 최신 보완일: 2026-11-24 (Asia/Seoul)
+- 작업 브랜치: `docs/figma-analysis`; 보완 전 Commit: `b0abfb4`
+- Figma File Key: `XhhPLJSwkdCMAJgzqFLELf`
+- 시각 기준: [최종 디자인 2:6](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=2-6); 공통 UI·토큰: [디자인 시스템 2:4](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=2-4); 흐름 참고: [와이어프레임 2:5](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=2-5)
+- [GitHub PR #5](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/5)는 open·미병합이며 HEAD는 `b0abfb4`. [PR #2](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/2) Tailwind 설정과 [PR #3](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/3) 협업 규칙도 2026-11-24 조회 시 open·미병합.
+- 최신 기획 결정은 사용자 제공 2026-11-24 요청문을 기준으로 했다. [Notion 요구사항정의](https://app.notion.com/p/3f7ff3436dff805bb67bf9d0aa6ea078)와 [공통규칙](https://app.notion.com/p/422ff3436dff801d899bf4dabdff399a)는 이번 작업에서 직접 조회하지 않았다.
 
-## 문서 지도
+## 문서 지도와 진행 상태
 
-| 파일                                                             | 다음 개발 작업에서 찾을 내용                                |
-| ---------------------------------------------------------------- | ----------------------------------------------------------- |
-| [01-project-overview.md](01-project-overview.md)                 | 현재 코드·브랜치·PR, 소유권, 착수 조건                      |
-| [02-design-system.md](02-design-system.md)                       | 확인된 색·폰트와 팀원 토큰/공통 UI 요청                     |
-| [03-component-inventory.md](03-component-inventory.md)           | 두 페이지의 모든 원본 symbol, Set 후보·Variant, Node ID     |
-| [04-component-specifications.md](04-component-specifications.md) | 사용자 담당 28개 독립 단위 후보의 구현 명세·Props 제안      |
-| [05-page-specifications.md](05-page-specifications.md)           | 81개 Frame 추적표, 사용자 담당 54개 화면/상태의 흐름별 명세 |
-| [06-implementation-plan.md](06-implementation-plan.md)           | 의존관계·우선순위·Issue 초안·Acceptance Criteria            |
-| [07-open-questions.md](07-open-questions.md)                     | 차단 결정·도구 한계·미분석 범위·다음 조회 순서              |
+| 문서                                               | 최신 내용                                             | 상태                            |
+| -------------------------------------------------- | ----------------------------------------------------- | ------------------------------- |
+| [01 프로젝트](01-project-overview.md)              | 코드·브랜치·PR·담당 경계                              | 보완 완료                       |
+| [02 디자인 시스템](02-design-system.md)            | 확인된 색·폰트, 로고, 카테고리 7/32, 공통 UI 계약     | 보완 완료; 토큰명 미확정        |
+| [03 원본 인벤토리](03-component-inventory.md)      | 117개 원본, 20개 Set 후보, 새 기준 노드 4개           | 보완 완료; Instance 연결 미확정 |
+| [04 컴포넌트 명세](04-component-specifications.md) | 사용자 32개 단위 후보, 새 4개 상세, Props 제안        | 보완 완료; API·일부 상태 미확정 |
+| [05 화면 명세](05-page-specifications.md)          | 81개 Frame 추적, 사용자 44개, 설명 보드·요구사항 연결 | 보완 완료; Prototype 미확정     |
+| [06 구현 계획](06-implementation-plan.md)          | 일정, Issue 초안, 32개 원본 매핑, 모바일 초기 검증    | 보완 완료; 실제 Issue 미생성    |
+| [07 미확정 사항](07-open-questions.md)             | 해결·사용자 결정·팀 합의·백엔드·기술·Figma 한계       | 보완 완료                       |
 
-## 집계와 판정
+## 최종 집계
 
-| 항목                        | 디자인 시스템 2:4 | 최종 디자인 2:6 | 합계 |
-| --------------------------- | ----------------: | --------------: | ---: |
-| 원본 Component(symbol) 노드 |                78 |              35 |  113 |
-| Component Set 후보          |                14 |               6 |   20 |
-| Set 하위 Variant            |                38 |              13 |   51 |
-| 독립 구현 단위 후보         |         54 (팀원) |     28 (사용자) |   82 |
+| 항목                | 디자인 시스템 2:4·팀원 | 최종 디자인 2:6·사용자 | 전체 |
+| ------------------- | ---------------------: | ---------------------: | ---: |
+| 원본 Component      |                     78 |                     39 |  117 |
+| Component Set 후보  |                     14 |                      6 |   20 |
+| Set 하위 Variant    |                     38 |                     13 |   51 |
+| 독립 Component      |                     40 |                     26 |   66 |
+| 독립 구현 단위 후보 |                     54 |                     32 |   86 |
 
-메타데이터는 Figma의 네이티브 Component Set 타입과 Instance의 mainComponent ID를 제공하지 않는다. 따라서 Set 및 구현 단위 수는 부모 Frame 아래 Variant 이름을 가진 symbol을 묶은 **후보 집계**다. 최종 페이지에는 81개 기준 크기 화면 Frame이 있고, 사용자 담당 실제 화면/상태 Frame은 54개다. 사용자 담당 54개 Frame 모두 상세 조회했고 대표 6개는 별도 스크린샷으로 확인했다. 중복 상태 Frame을 별도 페이지 구현 단위로 세지 않는다.
+Figma MCP 메타데이터의 `<symbol>`을 원본 Component로 집계했다. 네이티브 Component Set 유형과 기존 화면 Instance의 `mainComponent` 연결은 확인되지 않아 Set·구현 단위 수는 **후보**다. 2:6의 새 `symbol` 4개(`1039:19984`~`1039:19987`)는 내부에 기존 Instance를 포함한다. 새 구현 기준 노드의 존재와 기존 화면 연결 변경을 혼동하지 않는다.
 
-## 진행 상태
+화면 추적 대상 Frame **81개**는 375×812px 화면·상태 **79개**와 개발 설명 보드 **2개**(`418:10414` 370×812px, `403:10251` 394×812px)다. 사용자 담당 **44개 화면·상태**는 스플래시·로그인 2, 옷장 28, 마이페이지 14다. STC-001 착용 선택 5개는 팀원 페이지 담당안(최종 합의 전), STC-005 보관함·폴더 5개는 팀원 담당·구형 화면 채택 확인 전이다. Frame 수는 React Page 파일 수가 아니다.
 
-| Phase                | 상태       | 근거/남은 일                                                             |
-| -------------------- | ---------- | ------------------------------------------------------------------------ |
-| 1 프로젝트 환경      | 완료       | 로컬·PR #2/#3·최신 PR #3 문서와 현재 브랜치 차이 확인                    |
-| 2 Figma 전체 구조    | 부분 완료  | 전체 XML·원본/화면 목록 확보; 네이티브 Set·Instance 연결 미확인          |
-| 3 디자인 시스템·의존 | 부분 완료  | 색·폰트 샘플/공통 컴포넌트 후보 확인; Variable 도구 오류                 |
-| 4 사용자 원본 상세   | 부분 완료  | 28개 단위 전부 상세 조회·문서화; 네이티브 Set 타입·동작 계약 미확인      |
-| 5 사용자 페이지 상세 | 부분 완료  | 54개 Frame 추적·흐름 명세와 전부 상세 조회; Prototype·반응형 제약 미확인 |
-| 6 개발 계획          | 완료(초안) | Issue는 Markdown 초안만 작성, 번호/담당 확정 전                          |
-| 7 최종 검증          | 부분 완료  | 문서 참조·집계·수정 범위 확인; 미확정 Figma/API 항목 남음                |
+## 최신 결정과 다음 계약
 
-## 개발 의존성과 다음 세션
+- 로고 디자인 확정. 제공 SVG 2종은 현재 저장소에서 확인되지 않아 전달·배치는 후속 개발 작업이다.
+- 추구미는 페미닌·Y2K·미니멀·빈티지 레이어드·캐주얼. 의류는 7대분류·32소분류. 영어 카테고리 ID는 사용자 제공값을 유지한다.
+- 원샷 촬영의 카메라 가이드 오버레이는 제외. 촬영·갤러리·AI 검수·저장과 온보딩 별도 안내는 유지한다.
+- 마이페이지 Navigation Bar는 메인 `418:10290`에만 표시하고 하위 페이지에서는 숨긴다.
+- 독립 약관 동의 React Page는 이번 UI 범위에 넣지 않는다. 자체 서비스 약관 동의와 카카오 개인정보 제공 동의는 별도 정책 확인이 필요하다.
+- 디자인 시스템 토큰·폰트·Button·Icons·Navigation Bar·Option/Chip·입력·레이아웃·Safe Area 계약은 팀원에게 요청한다. API·AI·모바일 패키징은 [미확정 사항](07-open-questions.md)을 따른다.
 
-1. 공통 UI 담당에게 토큰, Button/Icons/Navigation Bar 사용 계약을 요청하고 ClosetItemCard의 원본·담당을 확인한다. PR #2·#3 병합 여부도 확인한다.
-2. 사용자 소유 Kakao 버튼과 옷장 검수/분류·마이페이지 알림 원본은 팀원 페이지에서 사용 여부를 확인한 뒤 공유한다.
-3. UI 착수 순서는 스플래시·로그인 Mock/인증 분기 계약 → 옷장 목록·등록/검수 → 마이페이지 → 상세/상태 검증을 권장한다. 병렬 작업은 [구현 계획](06-implementation-plan.md)을 참조한다.
-4. 분석을 이어갈 때 [미확정 범위](07-open-questions.md)를 확인하고, Prototype·반응형 제약과 원본 연결부터 조회한다. 현재 문서의 “사실/제안/미확정” 표시를 유지한다.
-
-이번 작업은 Markdown 문서 작성만 수행했다. React 코드·Figma 원본·GitHub Issue/PR·브랜치/Commit은 변경하지 않았다.
+이번 보완은 `docs/analysis/` Markdown만 수정한다. Figma 원본, React 코드, GitHub Issue/PR, 브랜치, Commit·Push는 변경하지 않는다.

@@ -44,7 +44,31 @@
 
 1. 색상·타이포그래피·간격·radius 변수의 실제 명칭, Mode 및 CSS/Tailwind v4 노출 방식.
 2. Button(회색·초록·disabled·긴 CTA), Navigation Bar, Icons prev/add/delete/camera/gallery, Category 선택 UI, Status Bar의 Props·상태·사용 예시.
-3. `ClosetCard`와 최종 옷장 화면의 `ClosetItemCard`가 같은 원본인지 확인. 후자의 참조 ID `587:10660`은 2:4/2:6 원본 목록에서 찾지 못해 담당자·제공 경로가 미확정이다.
+3. `ClosetCard`와 `ClosetItemCard`의 구조를 구분한다. 후자의 새 구현 기준 원본 `1039:19987`은 2:6에서 확인됐고 사용자 담당이다. 기존 화면 Instance가 새 노드를 직접 참조하는지는 미확인이다.
 4. 앱의 OS status/home indicator 렌더링 책임과 safe area 정책.
 
 **구현 제안:** 팀원이 결정한 CSS 변수 또는 Tailwind v4 `@theme` 매핑을 재사용한다. 매핑이 나오기 전에는 문서상 Figma 값을 참조하되 임의의 `tokens.css` 값을 확정하지 않는다.
+
+## 최신 로고·폰트·공통 UI 계약
+
+**최신 사용자 결정:** MAPIKO 로고 디자인은 확정됐다. 제공 에셋 이름은 `image 2.svg`, `반짝이는 크롬 풍선 글자 MyFitCore 1.svg`다. 현재 저장소의 추적 파일과 작업 트리에서 두 SVG는 발견되지 않았다. 실제 파일 전달·라이선스/사용권 확인 후 `mapiko-symbol.svg`, `mapiko-wordmark.svg` 같은 이름으로 배치하는 것은 후속 개발 Issue의 제안이다. 과거 Figma의 임시 텍스트 로고 정책은 적용하지 않는다.
+
+전역 폰트·디자인 토큰은 디자인 시스템 담당 팀원이 제공한다. A2Z 파일과 라이선스 확보 여부를 확인하고, 불가하면 Figma 설명 보드의 Noto Sans KR 임시 대체안을 사용한다. 최종 폰트·CSS 변수명은 협의 전이며 사용자 페이지에서 전역 체계를 중복 만들지 않는다. 팀원에게 토큰·폰트, Button, Icons, Navigation Bar, Option/Chip, 입력 UI, 공통 레이아웃·Safe Area의 Props·경로·사용 예시를 우선 요청한다.
+
+## 의류 카테고리 공통 정의
+
+**최신 사용자 결정:** 7개 대분류와 32개 소분류를 사용한다. 영어 식별자는 제공된 표 그대로 유지하고 한국어는 구현용 표시명이다. 실제 API 필드명·enum·응답 형식은 백엔드·AI팀 확인 전이다. `전체 카테고리`는 필터 옵션이며 의류 카테고리 값이 아니다. 과거 Figma의 양말·장갑·아이웨어·벨트 등은 최신 분류표에 없으므로 구현 상수에 추가하지 않는다.
+
+| 대분류 ID   | 표시명   | 소분류 ID → 한국어 표시명                                                                                                | 개수 |
+| ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------ | ---: |
+| `top`       | 상의     | `tshirt` 티셔츠, `shirt` 셔츠, `blouse` 블라우스, `knit` 니트, `hoodie` 후드티, `sweatshirt` 맨투맨, `sleeveless` 민소매 |    7 |
+| `bottom`    | 하의     | `jeans` 청바지, `slacks` 슬랙스, `shorts` 반바지, `mini_skirt` 미니스커트, `long_skirt` 롱스커트                         |    5 |
+| `dress`     | 원피스   | `mini_dress` 미니 원피스, `long_dress` 롱 원피스                                                                         |    2 |
+| `outerwear` | 아우터   | `jacket` 재킷, `blazer` 블레이저, `coat` 코트, `cardigan` 가디건, `padding` 패딩                                         |    5 |
+| `shoes`     | 신발     | `sneakers` 운동화, `flats` 플랫슈즈, `loafers` 로퍼, `heels` 힐, `boots` 부츠, `sandals` 샌들                            |    6 |
+| `bag`       | 가방     | `shoulder_bag` 숄더백, `tote_bag` 토트백, `backpack` 백팩, `crossbody_bag` 크로스백                                      |    4 |
+| `accessory` | 액세서리 | `hat` 모자, `scarf` 스카프·머플러, `jewelry` 주얼리                                                                      |    3 |
+
+**구현 제안:** `src/constants/clothingCategories.ts` 같은 단일 정의와 `src/types/clothing.ts`의 공통 타입을 옷장·검수·상세·착용 선택에서 재사용한다. `CategoryFilterTrigger`, `CategoryRow`, `ClothingCategoryEditor`, `AccessoryCategoryEditor`, AI 검수 및 팀원 STC-001 페이지가 소비한다. 실제 시트 전환과 선택 UI는 기존 Figma 상태를 기준으로 하되 목록 값은 이 최신 결정으로 교체한다.
+
+최종 추구미 표시명은 **페미닌, Y2K, 미니멀, 빈티지 레이어드, 캐주얼**이다. 그루지/그런지는 사용하지 않는다. 대표 1개·보조 최대 2개 규칙을 온보딩·홈·마이페이지·피드에서 공유한다. 영문 식별자는 백엔드·AI 확인 전이다.

@@ -1,8 +1,8 @@
 # 프로젝트 및 코드베이스 현황
 
 - 분석일: 2026-11-24
-- 로컬 브랜치: `docs/figma-analysis`, 기준 SHA: `2db91badb9f9398cfe127f3d66934b7cf031a76f`
-- 출처: 로컬 `AGENTS.md`, `README.md`, `package.json`, 라우팅/스타일 파일, `origin/chore/git-workflow`의 문서, GitHub PR #2·#3 조회
+- 로컬 브랜치: `docs/figma-analysis`, 현재 HEAD: `b0abfb4ca4104652558b1c29ac9e76fe6efad9a1`, PR 기준 develop: `2db91badb9f9398cfe127f3d66934b7cf031a76f`
+- 출처: 로컬 `AGENTS.md`, `README.md`, `package.json`, 라우팅/스타일 파일, `origin/chore/git-workflow`의 문서, GitHub PR #2·#3·#5 조회
 
 ## 확인된 사실
 
@@ -16,15 +16,17 @@
 | 경로 별칭 | `vite.config.ts`, `tsconfig.app.json`에 `@/` 매핑 확인                                                    | PR #3에서도 관련 설정·문서 정리                                              |
 | 문서      | 현재 루트 문서는 이전 CSS Modules·Flutter WebView 전제를 포함                                             | 사용자 확정 규칙과 PR #3의 Tailwind/Capacitor·담당 경계를 분석 기준으로 사용 |
 
-GitHub 연결 도구 조회 기준 PR [#2](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/2)와 [#3](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/3)은 모두 `develop` 대상 **open, 미병합**이다. GitHub CLI `gh pr list`는 네트워크 연결 오류가 발생했으며 연결된 GitHub 도구로 상태를 확인했다. 로컬 원격 추적 브랜치와 실제 GitHub 상태를 혼동하지 않는다.
+2026-11-24 GitHub 연결 조회 기준 PR [#2](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/2)와 [#3](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/3)은 `develop` 대상 **open, 미병합**이고 문서 PR [#5](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/5)도 **open, 미병합**이며 HEAD는 `b0abfb4`다. GitHub CLI `gh pr list`는 네트워크 연결 오류가 발생했으며 연결된 GitHub 도구로 상태를 확인했다. 로컬 원격 추적 브랜치와 실제 GitHub 상태를 혼동하지 않는다.
 
 ## 담당 경계
 
-| 대상                                                                | 담당                         |
-| ------------------------------------------------------------------- | ---------------------------- |
-| 디자인 시스템 `2:4` 원본/토큰/공통 UI, 온보딩 페이지                | 다른 프론트엔드 팀원         |
-| 최종 디자인 `2:6` 원본, 스플래시·로그인·디지털 옷장·마이페이지 화면 | 사용자                       |
-| 홈·캘린더·피드 페이지                                               | 현재 Issue/팀 합의 확인 필요 |
+| 대상                                                                                         | 담당                                   |
+| -------------------------------------------------------------------------------------------- | -------------------------------------- |
+| 디자인 시스템 `2:4` 원본/토큰/공통 UI, 온보딩 페이지                                         | 다른 프론트엔드 팀원                   |
+| 최종 디자인 `2:6` 원본 32개 단위 후보, 스플래시·로그인·디지털 옷장·마이페이지 화면·상태 44개 | 사용자                                 |
+| STC-001 착용 선택 페이지 5개                                                                 | 다른 팀원 담당안, 최종 합의 전         |
+| STC-005 코디 보관함·폴더 5개                                                                 | 다른 팀원 담당, 구형 화면 채택 확인 전 |
+| 홈·캘린더·피드 페이지                                                                        | 현재 Issue/팀 합의 확인 필요           |
 
 원본 컴포넌트의 위치와 화면 담당은 독립적으로 판별한다. 전체 목록은 [인벤토리](03-component-inventory.md)를 참조한다.
 
@@ -35,3 +37,10 @@ GitHub 연결 도구 조회 기준 PR [#2](https://github.com/My-Fit-Core/My-Fit
 **구현 제안:** `src/pages/{splash,login,closet,mypage}`, `src/components/{splash,login,closet,mypage}`, `src/mocks`, `src/types`를 필요한 시점에만 사용한다. `src/routes/AppRoutes.tsx`의 기존 타인 경로를 유지하며 인증 진입 정책 확정 후 `/`와 `/splash`를 조정한다.
 
 **미확정:** 인증/온보딩 완료 판별, Kakao OAuth 계약, API 스키마, 모바일 패키징, 실제 Issue 번호. [미확정 사항](07-open-questions.md) 참조.
+
+## 2026-11-24 개발 착수 기준 보정
+
+- 실제 코드 스타일은 현재 브랜치의 CSS Modules/전역 CSS이며 Tailwind v4는 PR #2의 미병합 제안이다. PR #3의 협업 문서는 읽기 전용으로 참고했다. 병합 전에는 현재 브랜치에 도입된 것으로 취급하지 않는다.
+- 2:4 원본·공통 UI·디자인 토큰·전역 폰트는 다른 팀원, 2:6 원본 39개(독립 구현 단위 후보 32개)는 사용자 소유다. 원본 소유와 사용 페이지 소유는 다를 수 있다.
+- 사용자 페이지는 스플래시·로그인 2개, 옷장 28개, 마이페이지 14개 화면·상태 Frame이다. 착용 선택 5개는 STC-001 팀원 담당안(최종 합의 전), 보관함·폴더 5개는 STC-005 팀원 담당으로 분리한다.
+- 공통 UI 계약이 오기 전에도 사용자 소유 카드·카테고리 공통 정의, Mock 상태, 화면별 데이터 타입·라우트 제안은 독립적으로 진행할 수 있다. 실제 API·인증 계약은 만들지 않는다.
