@@ -7,7 +7,7 @@ MAPIKO(마피코)는 AI 기반 패션 스타일링 및 디지털 옷장 서비�
 
 ## 실행 환경과 기술 스택
 
-Node.js 22.12 이상, npm 10 이상을 사용합니다. 초기 세팅 검증 환경은 Node.js 22.19.0, npm 10.9.3입니다. 주요 설치 버전은 React/React DOM 19.3.1, React Router DOM 7.18.6, Vite 8.3.8, TypeScript 5.9.3, ESLint 9.39.5, Prettier 3.10.1입니다. 정확한 전체 버전은 `package-lock.json`을 기준으로 합니다.
+Node.js 22.12 이상, npm 10 이상을 사용합니다. 초기 세팅 검증 환경은 Node.js 22.19.0, npm 10.9.3입니다. React, React Router, Vite, TypeScript, Tailwind CSS, ESLint, Prettier를 사용합니다. 정확한 전체 버전은 `package-lock.json`을 기준으로 합니다.
 
 ```bash
 npm ci
@@ -22,7 +22,7 @@ npm run dev
 - `src/components/common/`: 공통 컴포넌트 담당자 소유 영역. 디자인 시스템과 공통 Props가 확정되면 구현합니다.
 - `src/components/{layout,onboarding,home,closet,calendar,feed,mypage}/`: 도메인별 컴포넌트 영역.
 - `src/routes/`: 라우트 정의. `src/App.tsx`에서 연결합니다.
-- `src/styles/global.css`: 기본 리셋과 전역 스타일. `src/styles/tokens.css`: 확정된 디자인 토큰의 향후 위치. 페이지별 스타일은 CSS Modules를 사용합니다.
+- `src/styles/global.css`: Tailwind CSS 진입점과 전역 스타일. `src/styles/tokens.css`: 확정된 디자인 토큰의 향후 위치. 페이지 스타일에는 Tailwind 유틸리티 클래스를 사용합니다.
 - `src/assets/{fonts,icons,images}/`: 승인된 에셋. `public/`: 번들 처리가 필요 없는 정적 파일.
 - `src/apis/`, `src/hooks/`, `src/types/`, `src/constants/`, `src/mocks/`, `src/utils/`: 각 이름에 해당하는 공유 코드.
 - `.vscode/`: 공통 에디터 설정과 권장 확장 프로그램.
