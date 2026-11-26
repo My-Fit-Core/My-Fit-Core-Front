@@ -1,1 +1,107 @@
-/* Add approved Figma design tokens here when the shared design system is ready. */
+/* MAPIKO 디자인 토큰 (Figma 디자인 시스템 기준) */
+@theme {
+  /* 컬러: Tailwind 기본 색을 지우고 Figma 색만 사용. 불투명도는 bg-gray/30 처럼 사용 */
+  --color-*: initial;
+  --color-gray: #bcbcbc;
+  --color-green: #cef3cc;
+  --color-pink: #f6dbee;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-kakao: #fee500;
+
+  /* 폰트 */
+  --font-ko: 'A2Z', sans-serif;
+  --font-en: 'Playfair Display', serif;
+  --default-font-family: var(--font-ko);
+
+  /* 글자 스타일: 한글 (A2Z, 자간 5%) */
+  --text-display-ko: 50px;
+  --text-display-ko--line-height: normal;
+  --text-display-ko--letter-spacing: 0.05em;
+  --text-display-ko--font-weight: 700;
+
+  --text-heading1-ko: 35px;
+  --text-heading1-ko--line-height: normal;
+  --text-heading1-ko--letter-spacing: 0.05em;
+  --text-heading1-ko--font-weight: 600;
+
+  --text-heading2-ko: 28px;
+  --text-heading2-ko--line-height: normal;
+  --text-heading2-ko--letter-spacing: 0.05em;
+  --text-heading2-ko--font-weight: 500;
+
+  --text-subheading1-ko: 20px;
+  --text-subheading1-ko--line-height: normal;
+  --text-subheading1-ko--letter-spacing: 0.05em;
+  --text-subheading1-ko--font-weight: 400;
+
+  --text-subheading2-ko: 20px;
+  --text-subheading2-ko--line-height: normal;
+  --text-subheading2-ko--letter-spacing: 0.05em;
+  --text-subheading2-ko--font-weight: 300;
+
+  --text-body1-ko: 16px;
+  --text-body1-ko--line-height: normal;
+  --text-body1-ko--letter-spacing: 0.05em;
+  --text-body1-ko--font-weight: 200;
+
+  --text-body2-ko: 14px;
+  --text-body2-ko--line-height: normal;
+  --text-body2-ko--letter-spacing: 0.05em;
+  --text-body2-ko--font-weight: 200;
+
+  --text-caption-ko: 12px;
+  --text-caption-ko--line-height: normal;
+  --text-caption-ko--letter-spacing: 0.05em;
+  --text-caption-ko--font-weight: 100;
+
+  /* 글자 스타일: 영문 (Playfair Display, 자간 0) */
+  --text-heading1-en: 36px;
+  --text-heading1-en--line-height: normal;
+  --text-heading1-en--letter-spacing: 0;
+  --text-heading1-en--font-weight: 700;
+
+  --text-subheading1-en: 24px;
+  --text-subheading1-en--line-height: normal;
+  --text-subheading1-en--letter-spacing: 0;
+  --text-subheading1-en--font-weight: 600;
+
+  --text-subheading2-en: 20px;
+  --text-subheading2-en--line-height: normal;
+  --text-subheading2-en--letter-spacing: 0;
+  --text-subheading2-en--font-weight: 500;
+
+  --text-body1-en: 16px;
+  --text-body1-en--line-height: normal;
+  --text-body1-en--letter-spacing: 0;
+  --text-body1-en--font-weight: 400;
+
+  /* 그림자 (모두 x=0, y=0) */
+  --inset-shadow-btn-secondary: inset 0 0 6px 1px rgb(188 188 188 / 0.6);
+  --inset-shadow-btn-primary: inset 0 0 4px 0 rgb(206 243 204 / 0.56);
+  --inset-shadow-btn-primary-selected: inset 0 0 4px 0 #cef3cc;
+  --drop-shadow-navbar: 0 0 3.25px #f6dbee;
+  --drop-shadow-core: 0 0 2px #f6dbee;
+  --shadow-chip: 0 0 6px 1px #bcbcbc, 0 0 14px 3px #bcbcbc;
+  --text-shadow-tag: 0 0 8.1px #f6dbee;
+  --text-shadow-chip: 0 0 3px #bcbcbc, 0 0 8px #bcbcbc, 0 0 16px #bcbcbc;
+
+  /* 모서리 (NavBar, 칩, 태그는 rounded-full) */
+  --radius-btn: 1px;
+  --radius-card: 3px;
+  --radius-box: 5px;
+  --radius-codi: 10px;
+  --radius-kakao: 12px;
+}
+
+/*
+ * 2겹 drop-shadow: CSS drop-shadow()는 괄호 하나에 그림자 하나만 받으므로
+ * @theme 토큰 대신 클래스를 직접 만든다. (filter 전체를 덮어쓰니 다른 filter 클래스와 함께 쓰지 않는다)
+ */
+@utility drop-shadow-choice {
+  filter: drop-shadow(0 0 7.5px var(--color-green)) drop-shadow(0 0 7.5px var(--color-green));
+}
+
+@utility drop-shadow-tag {
+  filter: drop-shadow(0 0 5.4px var(--color-pink)) drop-shadow(0 0 5.4px var(--color-pink));
+}
