@@ -72,8 +72,8 @@ export default function MyPage() {
             아카이브
           </h2>
           <div className="mt-[6px]">
-            <MyPageMenuRow icon="like" label="좋아요한 코디" />
-            <MyPageMenuRow icon="archive" label="내가 올린 게시물" />
+            <MyPageMenuRow icon="like" label="좋아요한 코디" to="/mypage/likes" />
+            <MyPageMenuRow icon="archive" label="내가 올린 게시물" to="/mypage/posts" />
           </div>
         </section>
         <div className="my-4 h-px bg-[#e7e8ea]" />

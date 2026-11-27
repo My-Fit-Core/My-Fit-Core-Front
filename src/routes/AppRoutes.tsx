@@ -5,6 +5,7 @@ import FeedPage from '@/pages/feed/FeedPage';
 import HomePage from '@/pages/home/HomePage';
 import LoginPage from '@/pages/login/LoginPage';
 import MyPage from '@/pages/mypage/MyPage';
+import ArchivePage from '@/pages/mypage/ArchivePage';
 import NotificationsPage from '@/pages/mypage/NotificationsPage';
 import ProfilePage from '@/pages/mypage/ProfilePage';
 import MyStylesPage from '@/pages/mypage/MyStylesPage';
@@ -24,6 +25,8 @@ export function AppRoutes() {
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/mypage/notifications" element={<NotificationsPage />} />
       <Route path="/mypage/profile" element={<ProfilePage />} />
+      <Route path="/mypage/likes" element={<ArchivePage kind="likes" />} />
+      <Route path="/mypage/posts" element={<ArchivePage kind="posts" />} />
       <Route path="/mypage/styles" element={<MyStylesPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
