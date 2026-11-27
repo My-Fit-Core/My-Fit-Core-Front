@@ -2,40 +2,47 @@
 @import './fonts.css';
 @import './tokens.css';
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/*
+ * 기본 스타일은 @layer base 안에 둔다.
+ * layer 밖에 두면 Tailwind 유틸리티(@layer utilities)보다 항상 우선해서
+ * text-body2-ko 같은 클래스가 무시된다. (#18)
+ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-html {
-  -webkit-text-size-adjust: 100%;
-}
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
 
-body {
-  min-width: 0;
-  margin: 0;
-}
+  body {
+    min-width: 0;
+    margin: 0;
+  }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
 
-button {
-  cursor: pointer;
-}
+  button {
+    cursor: pointer;
+  }
 
-img,
-svg,
-video {
-  display: block;
-  max-width: 100%;
-}
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
 
-:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
 }
