@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import CalendarPage from '@/pages/calendar/CalendarPage';
 import ClosetPage from '@/pages/closet/ClosetPage';
@@ -8,6 +9,10 @@ import MyPage from '@/pages/mypage/MyPage';
 import OnboardingPage from '@/pages/onboarding/OnboardingPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 
+const ClosetComponentsPreviewPage = import.meta.env.DEV
+  ? lazy(() => import('@/pages/closet/ClosetComponentsPreviewPage'))
+  : null;
+
 export function AppRoutes() {
   return (
     <Routes>
@@ -16,6 +21,16 @@ export function AppRoutes() {
       <Route path="/onboarding" element={<OnboardingPage />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/closet" element={<ClosetPage />} />
+      {ClosetComponentsPreviewPage && (
+        <Route
+          path="/dev/closet-components"
+          element={
+            <Suspense fallback={null}>
+              <ClosetComponentsPreviewPage />
+            </Suspense>
+          }
+        />
+      )}
       <Route path="/calendar" element={<CalendarPage />} />
       <Route path="/feed" element={<FeedPage />} />
       <Route path="/mypage" element={<MyPage />} />
