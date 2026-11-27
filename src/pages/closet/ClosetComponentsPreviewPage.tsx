@@ -70,6 +70,12 @@ export default function ClosetComponentsPreviewPage() {
           value={{ kind: 'subcategory', classification }}
           onOpen={() => setIsEditOpen(true)}
         />
+        <p className="mt-5 mb-2 text-caption-ko">Disabled · 열기 불가</p>
+        <CategoryFilterTrigger
+          value={{ kind: 'all' }}
+          onOpen={() => setIsFilterOpen(true)}
+          disabled
+        />
         <CategoryBottomSheet
           mode="filter"
           open={isFilterOpen}

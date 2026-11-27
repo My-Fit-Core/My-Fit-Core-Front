@@ -144,9 +144,11 @@ function OpenCategoryBottomSheet(props: CategoryBottomSheetProps) {
           type="button"
           aria-label="카테고리 선택 닫기"
           onClick={props.onClose}
-          className="absolute top-[30px] right-[16px] flex size-[44px] items-center justify-center border-0 bg-transparent p-0 text-[30px] leading-none text-[#27272c]"
+          className="absolute top-[30px] right-[16px] flex size-[44px] items-center justify-center border-0 bg-transparent p-0 text-[#27272c]"
         >
-          ×
+          <span aria-hidden="true" className="text-[25px] leading-none">
+            ×
+          </span>
         </button>
       </header>
 
@@ -209,6 +211,7 @@ function OpenCategoryBottomSheet(props: CategoryBottomSheetProps) {
             variant="primary"
             size="long"
             state="selected"
+            aria-pressed={undefined}
             disabled={!draft || draft.category !== category}
             onClick={() => {
               if (draft && props.mode === 'edit') {

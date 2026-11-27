@@ -1,11 +1,11 @@
 # MAPIKO 프론트엔드 사전 분석 인덱스
 
-- 최신 보완일: 2026-11-24 (Asia/Seoul)
-- 작업 브랜치: `docs/figma-analysis`; 보완 전 Commit: `b0abfb4`
+- 최신 보완일: 2026-11-27 (Asia/Seoul)
+- 현재 범위는 Issue #16이며 초기 분석은 `docs/figma-analysis`에서 작성했다.
 - Figma File Key: `XhhPLJSwkdCMAJgzqFLELf`
 - 시각 기준: [최종 디자인 2:6](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=2-6); 공통 UI·토큰: [디자인 시스템 2:4](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=2-4); 흐름 참고: [와이어프레임 2:5](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=2-5)
-- [GitHub PR #5](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/5)는 open·미병합이며 HEAD는 `b0abfb4`. [PR #2](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/2) Tailwind 설정과 [PR #3](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/3) 협업 규칙도 2026-11-24 조회 시 open·미병합.
-- 최신 기획 결정은 사용자 제공 2026-11-24 요청문을 기준으로 했다. [Notion 요구사항정의](https://app.notion.com/p/3f7ff3436dff805bb67bf9d0aa6ea078)와 [공통규칙](https://app.notion.com/p/422ff3436dff801d899bf4dabdff399a)는 이번 작업에서 직접 조회하지 않았다.
+- Tailwind 설정, 협업 규칙과 초기 분석 문서는 `develop`에 병합됐다. [PR #2](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/2) · [PR #3](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/3) · [PR #5](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/5)
+- 서비스 흐름의 출처는 2026-11-24 요구사항과 Figma 화면이다. 의류 분류는 2026-11-27 사용자 결정과 최신 Figma를 따른다. [Notion 요구사항정의](https://app.notion.com/p/3f7ff3436dff805bb67bf9d0aa6ea078) · [공통규칙](https://app.notion.com/p/422ff3436dff801d899bf4dabdff399a)
 
 ## 문서 지도와 진행 상태
 
@@ -14,9 +14,9 @@
 | [01 프로젝트](01-project-overview.md)              | 코드·브랜치·PR·담당 경계                              | 보완 완료                       |
 | [02 디자인 시스템](02-design-system.md)            | 확인된 색·폰트, 로고, 카테고리 8/36, 공통 UI 계약     | 보완 완료; 토큰명 미확정        |
 | [03 원본 인벤토리](03-component-inventory.md)      | 117개 원본, 20개 Set 후보, 새 기준 노드 4개           | 보완 완료; Instance 연결 미확정 |
-| [04 컴포넌트 명세](04-component-specifications.md) | 사용자 32개 단위 후보, 새 4개 상세, Props 제안        | 보완 완료; API·일부 상태 미확정 |
+| [04 컴포넌트 명세](04-component-specifications.md) | 사용자 32개 단위 후보, Issue #16 구현 및 Props        | Issue #16 반영                  |
 | [05 화면 명세](05-page-specifications.md)          | 81개 Frame 추적, 사용자 44개, 설명 보드·요구사항 연결 | 보완 완료; Prototype 미확정     |
-| [06 구현 계획](06-implementation-plan.md)          | 일정, Issue 초안, 32개 원본 매핑, 모바일 초기 검증    | 보완 완료; 실제 Issue 미생성    |
+| [06 구현 계획](06-implementation-plan.md)          | 일정, Issue 초안, 32개 원본 매핑, 모바일 초기 검증    | I-03 구현 반영                  |
 | [07 미확정 사항](07-open-questions.md)             | 해결·사용자 결정·팀 합의·백엔드·기술·Figma 한계       | 보완 완료                       |
 | [08 옷장 컴포넌트](08-closet-components.md)        | Issue #16 Props·사용 예시·개발 미리보기               | 구현 완료; API 계약 미확정      |
 
@@ -37,10 +37,10 @@ Figma MCP 메타데이터의 `<symbol>`을 원본 Component로 집계했다. 네
 ## 최신 결정과 다음 계약
 
 - 로고 디자인 확정. 제공 SVG 2종은 현재 저장소에서 확인되지 않아 전달·배치는 후속 개발 작업이다.
-- 추구미는 페미닌·Y2K·미니멀·빈티지 레이어드·캐주얼. 의류는 7대분류·32소분류. 영어 카테고리 ID는 사용자 제공값을 유지한다.
+- 추구미는 페미닌·Y2K·미니멀·빈티지 레이어드·캐주얼이다. 의류는 모자를 포함한 8개 대분류·36개 소분류이며 영어 카테고리 ID는 공통 상수에서 관리한다. [의류 카테고리 공통 정의](02-design-system.md#의류-카테고리-공통-정의)
 - 원샷 촬영의 카메라 가이드 오버레이는 제외. 촬영·갤러리·AI 검수·저장과 온보딩 별도 안내는 유지한다.
 - 마이페이지 Navigation Bar는 메인 `418:10290`에만 표시하고 하위 페이지에서는 숨긴다.
 - 독립 약관 동의 React Page는 이번 UI 범위에 넣지 않는다. 자체 서비스 약관 동의와 카카오 개인정보 제공 동의는 별도 정책 확인이 필요하다.
-- 디자인 시스템 토큰·폰트·Button·Icons·Navigation Bar·Option/Chip·입력·레이아웃·Safe Area 계약은 팀원에게 요청한다. API·AI·모바일 패키징은 [미확정 사항](07-open-questions.md)을 따른다.
+- Issue #16은 기존 디자인 토큰·폰트와 공통 Button·Icon을 사용한다. 페이지 연동에 필요한 나머지 공통 UI와 API·AI·모바일 패키징은 [미확정 사항](07-open-questions.md)을 따른다.
 
-이번 보완은 `docs/analysis/` Markdown만 수정한다. Figma 원본, React 코드, GitHub Issue/PR, 브랜치, Commit·Push는 변경하지 않는다.
+옷장 컴포넌트는 개발 전용 미리보기에서 확인할 수 있다. 실제 옷장 페이지와 API·AI 연동은 후속 작업이다. [Issue #16 사용법](08-closet-components.md)

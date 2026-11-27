@@ -1,22 +1,20 @@
 # 프로젝트 및 코드베이스 현황
 
-- 분석일: 2026-11-24
-- 로컬 브랜치: `docs/figma-analysis`, 현재 HEAD: `b0abfb4ca4104652558b1c29ac9e76fe6efad9a1`, PR 기준 develop: `2db91badb9f9398cfe127f3d66934b7cf031a76f`
-- 출처: 로컬 `AGENTS.md`, `README.md`, `package.json`, 라우팅/스타일 파일, `origin/chore/git-workflow`의 문서, GitHub PR #2·#3·#5 조회
+- 최초 분석일은 2026-11-24이며, 코드 현황은 2026-11-27 Issue #16 브랜치를 기준으로 갱신했다.
+- 출처는 `AGENTS.md`, `package.json`, 라우팅·스타일·컴포넌트 코드와 `develop` 병합 이력이다.
 
 ## 확인된 사실
 
-| 항목      | 현재 분석 브랜치                                                                                          | 병합 대기 / 확정 규칙                                                        |
-| --------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| 기술      | React 19.3.1, React Router DOM 7.18.6, Vite 8.3.8, TypeScript 5.9.3 strict, npm                           | Tailwind CSS v4는 PR #2에서 준비 중                                          |
-| 스타일    | `src/styles/global.css`에 기본 리셋, `tokens.css`는 주석만 존재                                           | PR #2는 `@import 'tailwindcss'`, `tailwindcss`·`@tailwindcss/vite` 추가      |
-| 경로      | `/`가 `/home`으로 이동; `/login`, `/onboarding`, `/home`, `/closet`, `/calendar`, `/feed`, `/mypage` 존재 | `/splash`와 인증 기반 진입은 미구현                                          |
-| 페이지    | 각 페이지는 Placeholder. 실제 UI, API, 인증, Mock 로직 없음                                               | 12월 2일까지 페이지/주요 인터랙션, 12월 10일까지 API·AI 연동 계획            |
-| 공통 UI   | `src/components/common`에 구현 없음                                                                       | 다른 팀원 담당. 토큰/Props 미확정                                            |
-| 경로 별칭 | `vite.config.ts`, `tsconfig.app.json`에 `@/` 매핑 확인                                                    | PR #3에서도 관련 설정·문서 정리                                              |
-| 문서      | 현재 루트 문서는 이전 CSS Modules·Flutter WebView 전제를 포함                                             | 사용자 확정 규칙과 PR #3의 Tailwind/Capacitor·담당 경계를 분석 기준으로 사용 |
+| 항목      | 현재 코드                                                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| 기술      | React 19.3.1, React Router DOM 7.18.6, Vite 8.3.8, TypeScript 5.9.3 strict, Tailwind CSS v4, npm                             |
+| 스타일    | `global.css`에서 Tailwind를 불러오며 `tokens.css`와 `fonts.css`로 공통 토큰과 폰트를 관리한다.                               |
+| 경로      | `/`가 `/home`으로 이동한다. 기존 서비스 경로는 화면 골격이며 `/dev/closet-components`는 개발 전용이다.                       |
+| 공통 UI   | `src/components/common/`에 `Button`, `Icon`, `StyleTag`, `WeatherChip` 구현이 있다.                                          |
+| 옷장      | Issue #16에서 공통 타입, 8개 대분류·36개 소분류와 재사용 컴포넌트 5개를 제공한다. 실제 페이지와 API·AI 연동은 후속 작업이다. |
+| 경로 별칭 | `vite.config.ts`와 `tsconfig.app.json`에서 `@/`를 `src/`로 매핑한다.                                                         |
 
-2026-11-24 GitHub 연결 조회 기준 PR [#2](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/2)와 [#3](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/3)은 `develop` 대상 **open, 미병합**이고 문서 PR [#5](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/5)도 **open, 미병합**이며 HEAD는 `b0abfb4`다. GitHub CLI `gh pr list`는 네트워크 연결 오류가 발생했으며 연결된 GitHub 도구로 상태를 확인했다. 로컬 원격 추적 브랜치와 실제 GitHub 상태를 혼동하지 않는다.
+Tailwind 설정, 협업 규칙과 초기 분석 문서는 `develop`에 병합됐다. [PR #2](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/2) · [PR #3](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/3) · [PR #5](https://github.com/My-Fit-Core/My-Fit-Core-Front/pull/5)
 
 ## 담당 경계
 
@@ -32,15 +30,13 @@
 
 ## 재사용과 착수 조건
 
-현재 코드에서 직접 재사용 가능한 것은 React Router 골격, 별칭 설정, 전역 리셋, 디렉터리 구조다. UI 컴포넌트와 데이터 모델은 없다. 구현 전에 PR #2의 병합 여부와 공통 컴포넌트의 실제 API를 재확인해야 한다. 해당 작업 대기 중에도 라우트 설계안, 타입/Mock 데이터, 화면 상태 전이, 최종 디자인의 에셋 목록 정리는 병렬 진행 가능하다. 아직 병합되지 않은 코드가 현재 브랜치에 있다고 가정하지 않는다.
+옷장 메인·검수·정보 수정과 착용 아이템 선택 화면은 필요한 Issue #16 컴포넌트와 타입을 재사용한다. 미구현 화면의 라우트와 상태는 페이지 명세를 참고한다. [옷장 컴포넌트 사용법](08-closet-components.md) · [화면 명세](05-page-specifications.md)
 
 **구현 제안:** `src/pages/{splash,login,closet,mypage}`, `src/components/{splash,login,closet,mypage}`, `src/mocks`, `src/types`를 필요한 시점에만 사용한다. `src/routes/AppRoutes.tsx`의 기존 타인 경로를 유지하며 인증 진입 정책 확정 후 `/`와 `/splash`를 조정한다.
 
-**미확정:** 인증/온보딩 완료 판별, Kakao OAuth 계약, API 스키마, 모바일 패키징, 실제 Issue 번호. [미확정 사항](07-open-questions.md) 참조.
+**미확정:** 인증/온보딩 완료 판별, Kakao OAuth 계약, API 스키마, 모바일 패키징, 후속 Issue 범위. [미확정 사항](07-open-questions.md) 참조.
 
-## 2026-11-24 개발 착수 기준 보정
+## 2026-11-24 개발 착수 기준 기록
 
-- 실제 코드 스타일은 현재 브랜치의 CSS Modules/전역 CSS이며 Tailwind v4는 PR #2의 미병합 제안이다. PR #3의 협업 문서는 읽기 전용으로 참고했다. 병합 전에는 현재 브랜치에 도입된 것으로 취급하지 않는다.
 - 2:4 원본·공통 UI·디자인 토큰·전역 폰트는 다른 팀원, 2:6 원본 39개(독립 구현 단위 후보 32개)는 사용자 소유다. 원본 소유와 사용 페이지 소유는 다를 수 있다.
 - 사용자 페이지는 스플래시·로그인 2개, 옷장 28개, 마이페이지 14개 화면·상태 Frame이다. 착용 선택 5개는 STC-001 팀원 담당안(최종 합의 전), 보관함·폴더 5개는 STC-005 팀원 담당으로 분리한다.
-- 공통 UI 계약이 오기 전에도 사용자 소유 카드·카테고리 공통 정의, Mock 상태, 화면별 데이터 타입·라우트 제안은 독립적으로 진행할 수 있다. 실제 API·인증 계약은 만들지 않는다.

@@ -17,7 +17,13 @@ export default function ClosetEmptyState({ onRegister, className }: ClosetEmptyS
       <img src={mascot} alt="" className="size-[214px] object-contain" />
       <p className="w-full text-center text-body1-ko text-[#28272e]">옷장이 아직 비어 있어요</p>
       <div className="w-full max-w-[203px]">
-        <Button variant="primary" size="long" state="selected" onClick={onRegister}>
+        <Button
+          variant="primary"
+          size="long"
+          state="selected"
+          aria-pressed={undefined}
+          onClick={onRegister}
+        >
           옷 등록하기
         </Button>
       </div>

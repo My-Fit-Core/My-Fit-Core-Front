@@ -6,7 +6,7 @@
 
 ## 개발 미리보기
 
-`npm run dev` 실행 후 개발 서버 주소의 `/dev/closet-components`에 접속한다. 기본 Vite 포트라면 `http://localhost:5173/dev/closet-components`다. 375px 기준 폭에서 실제 컴포넌트만 나열하며 모바일 브라우저 폭에 따라 줄어든다. 필터 Trigger에서 8개 대분류와 36개 소분류를 직접 탐색하고 선택할 수 있다. 수정 Trigger에서는 임시 선택, 취소, 적용을 확인한다. 미리보기 라우트는 `import.meta.env.DEV`에서만 생성되며 프로덕션 빌드에는 포함되지 않는다. 제거할 때는 `src/routes/AppRoutes.tsx`의 개발 전용 라우트와 `ClosetComponentsPreviewPage.tsx`, `src/mocks/clothingPreview.ts`, 미리보기 전용 의류 이미지만 정리한다. 실제 컴포넌트와 카테고리 정의는 유지한다.
+`npm run dev` 실행 후 개발 서버 주소의 `/dev/closet-components`에 접속한다. 기본 Vite 포트라면 `http://localhost:5173/dev/closet-components`다. 375px 기준 폭에서 실제 컴포넌트만 나열하며 모바일 브라우저 폭에 따라 줄어든다. 필터 Trigger에서 8개 대분류와 36개 소분류를 직접 탐색하고 선택할 수 있다. 수정 Trigger에서는 임시 선택, 취소, 적용을 확인한다. Disabled 예시에서는 Trigger가 비활성화되어 시트를 열 수 없다. 미리보기 라우트는 `import.meta.env.DEV`에서만 생성되며 프로덕션 빌드에는 포함되지 않는다. 제거할 때는 `src/routes/AppRoutes.tsx`의 개발 전용 라우트와 `ClosetComponentsPreviewPage.tsx`, `src/mocks/clothingPreview.ts`, 미리보기 전용 의류 이미지만 정리한다. 실제 컴포넌트와 카테고리 정의는 유지한다.
 
 ## 카테고리와 타입
 
@@ -73,6 +73,7 @@ import ClosetItemCard from '@/components/closet/ClosetItemCard';
 ## Figma 근거와 후속 범위
 
 - 구현 원본: ClosetItemCard `1039:19987`, CategoryFilterTrigger `1039:19985`, CategoryRow `587:10687`·`587:10689`·`587:10694`, ClosetEmptyState `1039:19986`.
+- 닫기 글리프는 25px이며 터치 영역은 44×44px이다. [필터 닫기 `1083:15359`](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=1083-15359) · [편집 닫기 `1083:15417`](https://www.figma.com/design/XhhPLJSwkdCMAJgzqFLELf/마피코?node-id=1083-15417)
 - 최신 분류 원본: 최상위 필터 `1083:14300`, 편집 `787:12842`; 상의 `1083:14336`·`1083:14366`, 하의 `1083:14395`·`1083:14421`, 원피스 `1083:14446`·`1083:14466`, 아우터 `1083:14485`·`1083:14511`, 신발 `1083:14536`·`1083:14564`, 가방 `1083:14591`·`1083:14615`, 액세서리 `1083:14638`·`1083:14660`, 모자 `1134:16510`·`1134:16523`.
 - 사용 화면: 옷장 `1134:16823`, 갤러리 `1134:16895`, AI 검수 `1134:16967`, 정보 수정 `1134:17004`; 두께 QA `1084:18341`.
 - 옷장 메인·AI 검수 페이지·실제 API 매핑은 후속 Issue다. 착용 아이템 선택 페이지 담당자에게 본 문서의 타입과 카드 Props를 전달한다.
