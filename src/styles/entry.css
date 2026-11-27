@@ -1,0 +1,19 @@
+.entry-safe-area {
+  --entry-safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  padding-inline-start: max(24px, env(safe-area-inset-left, 0px));
+  padding-inline-end: max(24px, env(safe-area-inset-right, 0px));
+  padding-block-start: env(safe-area-inset-top, 0px);
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  padding-block-start: max(env(safe-area-inset-top, 0px), clamp(28px, 50dvh - 256px, 150px));
+  padding-block-end: max(var(--entry-safe-bottom), clamp(24px, 25dvh - 137px, 66px));
+}
+
+.login-artwork {
+  width: calc(100% + 1px);
+  margin-block-start: clamp(20px, 25dvh - 136px, 67px);
+}
