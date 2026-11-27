@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import AccountConfirmationDialog, {
+  type AccountIntent,
+} from '@/components/mypage/AccountConfirmationDialog';
 import MyPageHeader from '@/components/mypage/MyPageHeader';
 import MyPageMenuRow from '@/components/mypage/MyPageMenuRow';
 import ProfileAvatar from '@/components/mypage/ProfileAvatar';
@@ -11,6 +14,15 @@ export default function MyPage() {
   const navigate = useNavigate();
   const [profile] = useState(getProfile);
   const [preferences] = useState(getPursuitPreferences);
+  const [accountIntent, setAccountIntent] = useState<AccountIntent | null>(null);
+  const submittingRef = useRef(false);
+
+  function handleAccountConfirm() {
+    if (submittingRef.current) return;
+    submittingRef.current = true;
+    setAccountIntent(null);
+    navigate('/login');
+  }
   return (
     <div className="flex min-h-dvh min-w-0 flex-col bg-white">
       <MyPageHeader title="마이페이지" onBack={() => navigate('/home')} />
@@ -76,8 +88,18 @@ export default function MyPage() {
               description="코디 추천 알림 및 수신 시간"
               to="/mypage/notifications"
             />
-            <MyPageMenuRow icon="logout" label="로그아웃" description="현재 계정에서 로그아웃" />
-            <MyPageMenuRow icon="delete" label="회원탈퇴" description="탈퇴 전 안내를 확인하세요" />
+            <MyPageMenuRow
+              icon="logout"
+              label="로그아웃"
+              description="현재 계정에서 로그아웃"
+              onClick={() => setAccountIntent('logout')}
+            />
+            <MyPageMenuRow
+              icon="delete"
+              label="회원탈퇴"
+              description="탈퇴 전 안내를 확인하세요"
+              onClick={() => setAccountIntent('withdrawal')}
+            />
           </div>
         </section>
       </main>
@@ -85,6 +107,12 @@ export default function MyPage() {
         aria-hidden="true"
         className="h-[82px] shrink-0 bg-white"
         data-navigation-slot="pending"
+      />
+      <AccountConfirmationDialog
+        intent={accountIntent ?? 'logout'}
+        open={accountIntent !== null}
+        onCancel={() => setAccountIntent(null)}
+        onConfirm={handleAccountConfirm}
       />
     </div>
   );
