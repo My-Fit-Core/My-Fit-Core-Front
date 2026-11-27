@@ -5,6 +5,7 @@ import FeedPage from '@/pages/feed/FeedPage';
 import HomePage from '@/pages/home/HomePage';
 import LoginPage from '@/pages/login/LoginPage';
 import MyPage from '@/pages/mypage/MyPage';
+import MyStylesPage from '@/pages/mypage/MyStylesPage';
 import OnboardingPage from '@/pages/onboarding/OnboardingPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 
@@ -19,6 +20,7 @@ export function AppRoutes() {
       <Route path="/calendar" element={<CalendarPage />} />
       <Route path="/feed" element={<FeedPage />} />
       <Route path="/mypage" element={<MyPage />} />
+      <Route path="/mypage/styles" element={<MyStylesPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
