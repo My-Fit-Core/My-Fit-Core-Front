@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="DS / closet filter">
+<mask id="mask0_0_36" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+<rect id="Bounding box" x="-1.59442e-06" width="20" height="20" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_0_36)">
+<path id="dresser" d="M2.81781 17.0932V3.80508C2.81781 3.3483 2.98061 2.95727 3.30619 2.63199C3.63178 2.30671 4.02318 2.14407 4.48039 2.14407H14.4558C14.913 2.14407 15.3044 2.30671 15.63 2.63199C15.9556 2.95727 16.1184 3.3483 16.1184 3.80508V17.0932H14.4558V15.4322H4.48039V17.0932H2.81781ZM4.48039 8.78814H8.63681V3.80508H4.48039V8.78814ZM10.2994 5.4661H14.4558V3.80508H10.2994V5.4661ZM10.2994 8.78814H14.4558V7.12712H10.2994V8.78814ZM7.80553 12.9407H11.1307V11.2797H7.80553V12.9407ZM4.48039 10.4492V13.7712H14.4558V10.4492H4.48039Z" fill="#1C1B1F"/>
+</g>
+</g>
+</svg>

@@ -14,7 +14,7 @@
 | 백엔드 API/AI 명세                                                | 실제 Kakao 인증, 옷장·마이페이지 연동   | Mock 페이지                     |
 | 패키징 방식 초기 비교                                             | 카메라·시간 피커·OAuth 복귀 실기기 검증 | 브라우저 UI                     |
 
-팀원에게 먼저 받을 것: 토큰 이름/폰트, Button과 Icons, Navigation Bar, Input·TypeBar·Option/Chip Props, 공통 레이아웃·Safe Area 사용 방식. ClosetItemCard·빈 상태는 사용자 소유 원본으로 확인됐다. 사용자에게서 팀원에게 먼저 전달할 후보: Kakao 버튼, 알림 Toggle/TimeField와 Account Dialog, 옷장 ReviewCard·CategoryRow/Editor·PhotoModeTabs·저장 Dialog. 온보딩에서 실제 사용하는 사용자 소유 원본은 Instance 연결 확인 후 우선 전달한다.
+팀원에게 먼저 받을 것: 토큰 이름/폰트, Button과 Icons, Navigation Bar, Input·TypeBar·Option/Chip Props, 공통 레이아웃·Safe Area 사용 방식. ClosetItemCard·빈 상태는 사용자 소유 원본으로 확인됐다. 사용자에게서 팀원에게 먼저 전달할 후보: Kakao 버튼, 알림 Toggle/TimeField와 Account Dialog, 옷장 ReviewCard·CategoryRow·CategoryBottomSheet·PhotoModeTabs·저장 Dialog. 온보딩에서 실제 사용하는 사용자 소유 원본은 Instance 연결 확인 후 우선 전달한다.
 
 ## 11월 24일~12월 2일: UI·주요 인터랙션
 
@@ -46,25 +46,25 @@ P0는 12월 2일 목표를 차단하는 선행 작업과 옷장 핵심 흐름에
 
 ## 2026-11-24 Issue 초안 보정
 
-위 최초 Issue 표는 분석 이력으로 유지한다. 아래 표가 최신 담당 범위와 우선순위를 반영한 착수 초안이다. 실제 Issue를 만들거나 번호를 배정하지 않았다. 브랜치명 `ISSUE_NUMBER`는 실제 번호 확보 후 교체한다. P0/P1 및 S/M/L은 상대적 우선순위·규모 제안이다.
+위 최초 Issue 표는 분석 이력이다. 아래 표에는 담당 범위와 우선순위, 생성된 Issue #16을 반영했다. 브랜치명 `ISSUE_NUMBER`는 실제 번호 확보 후 교체한다. P0/P1 및 S/M/L은 상대적 우선순위·규모 제안이다.
 
-| Issue 코드·초안 / 담당                         | 우선·규모 | 선행·병렬 작업                              | 완료 조건                                                                                                           | 브랜치 제안                                      |
-| ---------------------------------------------- | --------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| I-01 토큰·공통 폰트·공통 UI 계약 / 팀원        | P0·M      | PR #2/#3 상태 확인; Mock 데이터 병렬        | Button·Icons·Navigation Bar·Option/Chip·입력·레이아웃·Safe Area의 Props·경로·사용 예시 공유                         | `chore/ISSUE_NUMBER-ui-contract`                 |
-| I-02 스플래시·로그인 UI / 사용자               | P0·M      | I-01, 확정 로고 SVG 전달; 인증 Mock 병렬    | 로고 에셋 적용, 기본·진행·실패 인라인 문구·취소, 중복 클릭 방지, 홈/온보딩 분기 Mock                                | `feat/ISSUE_NUMBER-splash-login`                 |
-| I-03 옷장 재사용 카드·카테고리 / 사용자        | P0·M      | I-01 Icons/Button; 카테고리 정의 독립       | ClosetItemCard·CategoryFilterTrigger·ClosetEmptyState·CategoryRow 제공, 7/32 분류 재사용, STC-001 팀원에 Props 전달 | `feat/ISSUE_NUMBER-closet-components`            |
-| I-04 옷장 메인·필터 / 사용자                   | P0·L      | I-03, Navigation Bar; 등록 Mock 병렬        | 목록·전체 빈 상태·필터 0건·등록 진입, 최신 카테고리 표시                                                            | `feat/ISSUE_NUMBER-closet-main`                  |
-| I-05 사진 선택·AI Mock / 사용자                | P0·L      | I-01, 이미지 접근 초기 검증; 검수 Mock 병렬 | 촬영·갤러리·선택 취소·다중 의류 사진·분석 중·0건·실패, 가이드 오버레이 제외                                         | `feat/ISSUE_NUMBER-closet-photo-ai`              |
-| I-06 결과 검수·저장 / 사용자                   | P0·L      | I-03/I-05; 상세 Mock 병렬                   | 제외·카테고리 수정·0/1/다수·저장 중·실패 복구, 7/32 분류                                                            | `feat/ISSUE_NUMBER-closet-review`                |
-| I-07 의류 상세·수정·삭제 / 사용자              | P1·M      | I-03/I-04, 공통 입력                        | 원본/누끼·분류·메모·삭제 확인과 오류 복구                                                                           | `feat/ISSUE_NUMBER-closet-detail`                |
-| I-08 마이페이지·프로필 / 사용자                | P1·L      | I-01; 아카이브 병렬                         | 메인·기본 아바타·프로필·SNS 링크·하위 페이지 Navigation Bar 숨김                                                    | `feat/ISSUE_NUMBER-mypage-profile`               |
-| I-09 추구미 관리 / 사용자                      | P1·M      | I-01 Option/Chip; 프로필 병렬               | 5개 추구미, 대표 1개·보조 최대 2개, 이름 일관성                                                                     | `feat/ISSUE_NUMBER-mypage-styles`                |
-| I-10 아카이브·알림 / 사용자                    | P1·L      | I-01, I-08; 계정 Dialog 병렬                | ArchiveCard 목록/Empty, 알림 ON/OFF·시간 UI, 메인만 Navigation Bar                                                  | `feat/ISSUE_NUMBER-mypage-archive-notifications` |
-| I-11 계정 Dialog / 사용자                      | P1·M      | I-01, 인증·탈퇴 정책; I-08 병렬             | 로그아웃·탈퇴 확인/취소·제출 중, 탈퇴 정책 미확정 표기                                                              | `feat/ISSUE_NUMBER-account-dialogs`              |
-| I-12 UI·통합 검증 / 사용자·팀원                | P0·M      | I-02~I-11 UI 완료                           | typecheck/lint/format/build, 화면 상태·접근성·실기기 viewport 확인                                                  | `test/ISSUE_NUMBER-ui-integration`               |
-| I-13 실제 API·AI·OAuth 연동 / 사용자·백엔드·AI | P0·L      | API·AI·OAuth 계약 확정; UI Mock 병렬        | 로그인/가입 분기·옷장 CRUD·AI·마이페이지 저장의 실제 응답·오류 처리                                                 | `feat/ISSUE_NUMBER-api-ai-integration`           |
+| Issue 코드·초안 / 담당                         | 우선·규모 | 선행·병렬 작업                              | 완료 조건                                                                                                   | 브랜치 제안                                      |
+| ---------------------------------------------- | --------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| I-01 토큰·공통 폰트·공통 UI 계약 / 팀원        | P0·M      | PR #2/#3 상태 확인; Mock 데이터 병렬        | Button·Icons·Navigation Bar·Option/Chip·입력·레이아웃·Safe Area의 Props·경로·사용 예시 공유                 | `chore/ISSUE_NUMBER-ui-contract`                 |
+| I-02 스플래시·로그인 UI / 사용자               | P0·M      | I-01, 확정 로고 SVG 전달; 인증 Mock 병렬    | 로고 에셋 적용, 기본·진행·실패 인라인 문구·취소, 중복 클릭 방지, 홈/온보딩 분기 Mock                        | `feat/ISSUE_NUMBER-splash-login`                 |
+| I-03 옷장 재사용 카드·카테고리 / 사용자        | P0·M      | I-01 Icons/Button; 카테고리 정의 독립       | ClosetItemCard·CategoryFilterTrigger·CategoryRow·CategoryBottomSheet·ClosetEmptyState와 8/36 공통 분류 구현 | `feat/#16-closet-components`                     |
+| I-04 옷장 메인·필터 / 사용자                   | P0·L      | I-03, Navigation Bar; 등록 Mock 병렬        | 목록·전체 빈 상태·필터 0건·등록 진입, 최신 카테고리 표시                                                    | `feat/ISSUE_NUMBER-closet-main`                  |
+| I-05 사진 선택·AI Mock / 사용자                | P0·L      | I-01, 이미지 접근 초기 검증; 검수 Mock 병렬 | 촬영·갤러리·선택 취소·다중 의류 사진·분석 중·0건·실패, 가이드 오버레이 제외                                 | `feat/ISSUE_NUMBER-closet-photo-ai`              |
+| I-06 결과 검수·저장 / 사용자                   | P0·L      | I-03/I-05; 상세 Mock 병렬                   | 제외·카테고리 수정·0/1/다수·저장 중·실패 복구, 8/36 분류                                                    | `feat/ISSUE_NUMBER-closet-review`                |
+| I-07 의류 상세·수정·삭제 / 사용자              | P1·M      | I-03/I-04, 공통 입력                        | 원본/누끼·분류·메모·삭제 확인과 오류 복구                                                                   | `feat/ISSUE_NUMBER-closet-detail`                |
+| I-08 마이페이지·프로필 / 사용자                | P1·L      | I-01; 아카이브 병렬                         | 메인·기본 아바타·프로필·SNS 링크·하위 페이지 Navigation Bar 숨김                                            | `feat/ISSUE_NUMBER-mypage-profile`               |
+| I-09 추구미 관리 / 사용자                      | P1·M      | I-01 Option/Chip; 프로필 병렬               | 5개 추구미, 대표 1개·보조 최대 2개, 이름 일관성                                                             | `feat/ISSUE_NUMBER-mypage-styles`                |
+| I-10 아카이브·알림 / 사용자                    | P1·L      | I-01, I-08; 계정 Dialog 병렬                | ArchiveCard 목록/Empty, 알림 ON/OFF·시간 UI, 메인만 Navigation Bar                                          | `feat/ISSUE_NUMBER-mypage-archive-notifications` |
+| I-11 계정 Dialog / 사용자                      | P1·M      | I-01, 인증·탈퇴 정책; I-08 병렬             | 로그아웃·탈퇴 확인/취소·제출 중, 탈퇴 정책 미확정 표기                                                      | `feat/ISSUE_NUMBER-account-dialogs`              |
+| I-12 UI·통합 검증 / 사용자·팀원                | P0·M      | I-02~I-11 UI 완료                           | typecheck/lint/format/build, 화면 상태·접근성·실기기 viewport 확인                                          | `test/ISSUE_NUMBER-ui-integration`               |
+| I-13 실제 API·AI·OAuth 연동 / 사용자·백엔드·AI | P0·L      | API·AI·OAuth 계약 확정; UI Mock 병렬        | 로그인/가입 분기·옷장 CRUD·AI·마이페이지 저장의 실제 응답·오류 처리                                         | `feat/ISSUE_NUMBER-api-ai-integration`           |
 
-I-02~I-12의 UI 일정은 11월 24일~12월 2일, I-13의 실제 연동은 12월 3일~10일, 발표 전 통합·실기기 검증이다. STC-001 착용 선택과 STC-005 보관함 페이지는 사용자 Issue에서 제외한다. I-03의 카드·카테고리 계약은 STC-001 팀원에게 제공한다.
+I-02~I-12의 UI 일정은 11월 24일~12월 2일, I-13의 실제 연동은 12월 3일~10일, 발표 전 통합·실기기 검증이다. STC-001 착용 선택과 STC-005 보관함 페이지는 사용자 Issue에서 제외한다. I-03의 카드·카테고리 계약은 [Issue #16 사용법](08-closet-components.md)에 정리했다. I-04·I-06·I-07은 페이지에서 해당 컴포넌트를 연결하는 후속 작업이다.
 
 ## 모바일 기술 초기 검증
 
@@ -72,7 +72,7 @@ I-02~I-12의 UI 일정은 11월 24일~12월 2일, I-13의 실제 연동은 12월
 
 ## 사용자 담당 32개 구현 단위 후보 → Issue 추적
 
-구현 방식은 제안이다. Variant는 Set 단위로 묶고, 일부 원본은 정적 에셋·OS UI·공통 컴포넌트 조합으로 처리한다. 원본의 페이지 배치와 화면 담당은 별개다. 아래 각 행은 [인벤토리](03-component-inventory.md)의 2:6 원본/Set 후보 한 단위다.
+I-03 시트 원본은 `CategoryBottomSheet` 편집 모드에 통합했다. 후속 작업의 구현 방식은 제안이다. Variant는 Set 단위로 묶고 일부 원본은 정적 에셋·OS UI·공통 컴포넌트 조합으로 처리한다. 원본의 페이지 배치와 화면 담당은 별개다. 아래 각 행은 [인벤토리](03-component-inventory.md)의 2:6 원본/Set 후보 한 단위다.
 
 | Figma 원본                                                | Node ID      | 방식                   | 관련 페이지    | 요구사항        | Issue     | 팀원 의존       | 우선 | 미확정             |
 | --------------------------------------------------------- | ------------ | ---------------------- | -------------- | --------------- | --------- | --------------- | ---- | ------------------ |
@@ -91,8 +91,8 @@ I-02~I-12의 UI 일정은 11월 24일~12월 2일, I-13의 실제 연동은 12월
 | Group 36                                                  | `873:15397`  | 협의 필요              | 옷장           | CLO-001         | I-04      | Icons           | P1   | 원본 역할          |
 | image 6                                                   | `918:3775`   | 정적 에셋              | 사진 확인      | CLO-002         | I-05      | 에셋            | P0   | 사용권             |
 | DigitalCloset / 4-3 ClothingReviewCard / Detected         | `739:12677`  | 독립 React 컴포넌트    | 검수           | CLO-004         | I-06      | Icons·Button    | P0   | AI 데이터          |
-| DigitalCloset / ClothingCategoryEditor / Shared Sheet     | `787:12842`  | 독립 React 컴포넌트    | 검수·수정      | CLO-004/005     | I-06/I-07 | Button          | P0   | API 매핑           |
-| DigitalCloset / AccessoryCategoryEditor / Shared Sheet    | `796:13622`  | 기존 시트 조합         | 검수·수정      | CLO-004/005     | I-06/I-07 | Button          | P0   | API 매핑           |
+| DigitalCloset / ClothingCategoryEditor / Shared Sheet     | `787:12842`  | 편집 모드로 통합       | 검수·수정      | CLO-004/005     | I-03      | Button          | P0   | API 매핑           |
+| DigitalCloset / AccessoryCategoryEditor / Shared Sheet    | `796:13622`  | 액세서리 분류로 통합   | 검수·수정      | CLO-004/005     | I-03      | Button          | P0   | API 매핑           |
 | DigitalCloset / ClothingDetailInfoRow                     | `792:13327`  | 독립 React 컴포넌트    | 의류 상세      | CLO-005         | I-07      | Typography      | P1   | 없음               |
 | DigitalCloset / DangerButton                              | `792:13339`  | 공통 Button 조합       | 의류 상세      | CLO-005         | I-07      | Button          | P1   | 위험 Variant       |
 | DigitalCloset / ConfirmationDialog                        | `792:13341`  | 독립 React 컴포넌트    | 의류 삭제      | CLO-005         | I-07      | Button          | P1   | Dialog 공통화      |
