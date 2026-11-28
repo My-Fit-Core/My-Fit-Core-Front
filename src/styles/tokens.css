@@ -80,8 +80,10 @@
   --inset-shadow-btn-secondary: inset 0 0 6px 1px rgb(188 188 188 / 0.6);
   --inset-shadow-btn-primary: inset 0 0 6px 1px rgb(206 243 204 / 0.8);
   --inset-shadow-btn-primary-selected: inset 0 0 4px 0 #cef3cc;
-  --drop-shadow-navbar: 0 0 3.25px #f6dbee;
+  --shadow-navbar: 0 0 6px 1px #f6dbee;
   --drop-shadow-core: 0 0 2px #f6dbee;
+  --shadow-core: 0 0 4px rgb(188 188 188 / 0.97);
+  --shadow-core-selected: 0 0 4px #f6dbee;
   --text-shadow-tag: 0 0 8.1px #f6dbee;
   --text-shadow-chip: 0 0 3px #bcbcbc, 0 0 8px #bcbcbc, 0 0 16px #bcbcbc;
 
